@@ -1,0 +1,31 @@
+
+<script type="text/javascript">
+// https://developer.mozilla.org/en-US/docs/Web/API/Document/open
+// https://stackoverflow.com/questions/4292603/replacing-entire-page-including-head-using-javascript
+
+//C:\GitHub\Sandbox\redirect\redirect.html
+
+//fetch('http://localhost:8080/examplePage.html',  {mode: 'no-cors'})
+fetch('http://localhost:8080/examplePage.html')
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(html) {
+    document.open('text/html');
+    // https://stackoverflow.com/questions/3494954/how-do-i-set-a-pages-base-href-in-javascript
+    document.write("<base href='http://localhost:8080/'/>");
+    // restaurant.duckweb.artGallery.com/pasta.jpg
+    // artGallery.com/duckWeb/restaurant/pasta.jpg
+    // restaurant.com/pasta.jpg
+    document.write(html);
+    //document.write("<base href='file:///C:/GitHub/Sandbox/aiohttp_server/public/'/>");
+    document.close();
+    // There might be a race condition here, so we should put this into onLoad
+    document.getElementsByTagName("base")[0].href='file:///C:/GitHub/Sandbox/aiohttp_server/public/'; 
+    
+  });
+
+//document.open('text/html');document.write('<!DOCTYPE HTML><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>HAI</title></head><body><h1>OMG HAI2U!!!1</h1></body></html>');
+//document.close();
+
+</script>
