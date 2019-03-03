@@ -1,10 +1,8 @@
-'''
-https://docs.aiohttp.org/en/stable/web_quickstart.html
-
-'''
-
 from aiohttp import web
-#import aiohttp_cors
+import aiohttp_cors
+
+import random
+import sys
 
 import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -15,9 +13,10 @@ class Server:
         with open('redirect.html', 'r') as myfile:
             # Make sure to escape by using double {{ and }}
             self.redirectTextUnformatted=myfile.read()
+            self.redirectServers = ["http://localhost:8000", "http://localhost:8001", "http://localhost:8002", "http://localhost:8003"]            
 
     async def send_redirect_data(self, request):
-        redirectHost = "http://actualHost.com/"
+        redirectHost = random.choice(self.redirectServers)
         filePath = request.rel_url
         apparentHost = request.url.origin()
         redirectText = self.redirectTextUnformatted.format(redirectHost, filePath, apparentHost)
@@ -33,12 +32,13 @@ class Server:
                 )
         })
         app.router.add_static('/duckweb/', 'public/')
-        app.add_routes([web.get('/{filePath}', self.send_redirect_data)])
-
+        
         # https://github.com/aio-libs/aiohttp-cors/issues/151
         for resource in list(app.router.resources()):
            cors.add(resource)
-        web.run_app(app)
+
+        app.add_routes([web.get('/{anyPath:.*}', self.send_redirect_data)])
+        web.run_app(app, port=sys.argv[1])
 
 if __name__ == "__main__":
     server = Server()

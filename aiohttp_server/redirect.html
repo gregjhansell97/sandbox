@@ -1,11 +1,11 @@
 <script type="text/javascript">
-fetch('{0}{1}')
+fetch('{0}/duckweb{1}')
   .then(function(response) {{
     return response.text();
   }})
   .then(function(html) {{
-    document.write("<base href='{0}'/>");
+    document.write("<base href='{0}/duckweb/'/>");
     document.write(html);
-    document.getElementsByTagName("base")[0].href='{2}';
+    document.getElementsByTagName("base")[0].href='{2}/';
   }});
 </script>
