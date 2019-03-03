@@ -10,7 +10,7 @@ import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 
-class SimpleServer:
+class StaticServer:
     def run(self):
         app = web.Application()
         cors = aiohttp_cors.setup(app, defaults={
@@ -29,5 +29,5 @@ class SimpleServer:
         web.run_app(app)
 
 if __name__ == "__main__":
-    server = SimpleServer()
+    server = StaticServer()
     server.run()

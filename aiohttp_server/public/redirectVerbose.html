@@ -11,7 +11,11 @@ fetch('http://localhost:8080/examplePage.html')
     return response.text();
   })
   .then(function(html) {
+  
+    // Not needed !?
     document.open('text/html');
+
+    
     // https://stackoverflow.com/questions/3494954/how-do-i-set-a-pages-base-href-in-javascript
     document.write("<base href='http://localhost:8080/'/>");
     // restaurant.duckweb.artGallery.com/pasta.jpg
@@ -19,7 +23,11 @@ fetch('http://localhost:8080/examplePage.html')
     // restaurant.com/pasta.jpg
     document.write(html);
     //document.write("<base href='file:///C:/GitHub/Sandbox/aiohttp_server/public/'/>");
+
+
+    // Not needed !?
     document.close();
+
     // There might be a race condition here, so we should put this into onLoad
     document.getElementsByTagName("base")[0].href='file:///C:/GitHub/Sandbox/aiohttp_server/public/'; 
     
