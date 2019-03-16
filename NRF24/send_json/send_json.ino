@@ -17,7 +17,7 @@ RF24 radio(7, 8);
 
 #include <ArduinoJson.h>
 
-const byte channel[][6] = { "00001", "00002", "00003" };
+const byte address[][6] = { "00001", "00002", "00003" };
 int num = 1;
 
 // const uint8_t* json = "{\"roomID\":23,\"occupied\":1}";
@@ -29,7 +29,7 @@ char json[128];
 void setup() {
     Serial.begin(9600);
     radio.begin();
-    radio.openWritingPipe(channel[0]);
+    radio.openWritingPipe(address[0]);
     radio.setPALevel(RF24_PA_MIN);
 
 
