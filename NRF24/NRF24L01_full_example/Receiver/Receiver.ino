@@ -6,6 +6,11 @@ RF24 radio(7, 8);
 
 const byte address[6] = "00001";
 
+struct HiveMsg {
+  byte x;
+  char text[32];
+};
+
 void setup() {
   Serial.begin(9600);
   radio.begin();
@@ -17,8 +22,9 @@ void setup() {
 void loop() {
   if (radio.available()) {
     Serial.println("Recieved...");
-    char text[32] =  "";
-    radio.read(&text, sizeof(text));
-    Serial.println(text);
+    HiveMsg m;
+    radio.read(&m, sizeof(m));
+    Serial.println(m.x);
+    Serial.println(m.text);
   }
 }
