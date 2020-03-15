@@ -1,0 +1,6 @@
+these are some extra steps I found I had to do on top of following the
+installation instructions found on their website
+
+0. pip install Pillow #imaging library
+1. sudo apt-get install xclip xsel #for copy paste stuff
+2. sudo adduser $USER input #for user input (bad permissions otherwise)
