@@ -22,6 +22,21 @@ def listen(input_q):
     except KeyboardInterrupt:
         pass
 
+class A:
+    def __init__(self, q):
+        self.q = q
+def run_a(a):
+    r = a.q.get()
+    print(r)
+
+if __name__ == "__main__":
+    a = A(Queue())
+    p = Process(target=run_a, args=(a,))
+    p.start()
+    a.q.put("hello")
+    p.join()
+
+"""
 if __name__ == "__main__":
     input_q = Queue()
     output_qs = []
@@ -46,3 +61,4 @@ if __name__ == "__main__":
     print("")
     input_q.put(None)
     p.join()
+"""
